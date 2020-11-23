@@ -1,0 +1,57 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Control de un inventario</title>
+</head>
+<body>
+    <form style="font-size: 20px">
+        <div style="margin: 50px 200px 50px 200px">
+            <div id="acciones" style="margin: 10px 200px 10px 200px">
+                <label for="numero">Acciones realizadas:</label><br>
+            </div>
+            <div style="margin: 50px 200px 10px 200px">
+                <label for="text">Nombre del producto:</label>
+                <input type="text" id="nom"><br><br>
+
+                <label for="text">Codigo del producto:</label>
+                <input type="number" id="cod"><br><br>
+
+                <label for="text">Descripción breve del producto:</label>
+                <input type="text" id="desc"><br><br>
+
+                <label for="text">Cantidad de productos:</label>
+                <input type="number" id="cant"><br><br>
+
+                <label for="text">Costo del producto:</label>
+                <input type="number" id="cost"><br><br>
+                <input type="button" value="Agregar nuevo producto" id="btnAgregar"/><br><br>
+
+                <label for="numero">Posición para insertar el producto:</label>
+                <input type="number" id="indicar"><br><br>
+                <input type="button" value="Agregar nuevo producto en la posicion" id="btnInsertarPos"/><br><br>
+            </div>
+            <div style="margin: 10px 200px 10px 200px">
+                <label for="numero">Borrar un producto por codigo:</label>
+                <input type="number" id="borrarCodigo"><br><br>
+                <input type="button" value="Borrar" id="btnBorrar"/><br><br>
+            </div>
+            <div style="margin: 10px 200px 10px 200px">
+                <label for="numero">Buscar un producto por codigo:</label>
+                <input type="number" id="buscarPorCodigo"><br><br>
+                <input type="button" value="Buscar" id="btnBuscar"/><br><br>
+                <div id="busquedaResult"></div>
+            </div>
+            <div style="margin: 10px 200px 10px 200px">
+                <input type="button" value="Recuperar todos los productos" id="btnListar"/><br>
+                <div id="resultados"></div><br>
+                <input type="button" value="Recuperar todos los productos en orden inverso" id="btnListarInv"/><br><br>
+                <div id="resultadosInv"></div><br>
+            </div>
+        </div>
+    </form>
+    <script src="main.js"></script>
+</body>
+</html>
