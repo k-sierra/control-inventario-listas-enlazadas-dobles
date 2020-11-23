@@ -21,15 +21,15 @@ class Producto {
             valorM: parseFloat(amount) * parseFloat(price)
         }
         this.siguiente = null;
-        this.anterior = null
+        this.anterior = null;
     }
 }
 
 class Inventario {
     constructor() {
-        this.inicio = null
-        this.cola = null
-        this.tamaño = 0
+        this.inicio = null;
+        this.cola = null;
+        this.tamaño = 0;
     }
 
     verProductos() {
@@ -37,126 +37,121 @@ class Inventario {
     }
 
     verProductosAlReves() {
-        return this.cola
+        return this.cola;
     }
 
     añadirProducto(nuevoProducto) {
         if (this.cola) {
-            nuevoProducto.anterior = this.cola
-            this.cola.siguiente = nuevoProducto
-            this.cola = nuevoProducto
+            nuevoProducto.anterior = this.cola;
+            this.cola.siguiente = nuevoProducto;
+            this.cola = nuevoProducto;
         } else {
-            this.cola = nuevoProducto
-            this.inicio = nuevoProducto
+            this.cola = nuevoProducto;
+            this.inicio = nuevoProducto;
         }
-
-        this.tamaño++
+        this.tamaño++;
     }
 
     eliminarInicio() {
-        if (this.inicio == null) return false
+        if (this.inicio == null) return false;
 
         if (this.inicio == this.cola) {
-            this.inicio = null
-            this.cola   = null
+            this.inicio = null;
+            this.cola   = null;
         } else {
-            this.inicio = this.inicio.siguiente
-            this.inicio.anterior = null
+            this.inicio = this.inicio.siguiente;
+            this.inicio.anterior = null;
         }
-        
-        this.tamaño--
-        return true
+        this.tamaño--;
+        return true;
     }
 
     eliminarUltimo() {
-        if (this.cola == null) return false
+        if (this.cola == null) return false;
 
         if (this.cola == this.inicio) {
-            this.cola   = null
-            this.inicio = null
+            this.cola   = null;
+            this.inicio = null;
         } else {
-            this.cola = this.cola.anterior
-            this.cola.siguiente = null
+            this.cola = this.cola.anterior;
+            this.cola.siguiente = null;
         }
-        this.tamaño--
-        return true
+        this.tamaño--;
+        return true;
     }
 
     eliminarProducto(codigo) {
-        let actual = this.inicio
-        let aux   = null
+        let actual = this.inicio;
+        let aux   = null;
         
         while (actual != null) {
             if (actual.producto.codigo == codigo) {
                 if (aux == null) {
-                    return this.eliminarInicio()
+                    return this.eliminarInicio();
                 } else if(actual.siguiente == null) {
-                    return this.eliminarUltimo()
+                    return this.eliminarUltimo();
                 } else {
-                    aux.siguiente = actual.siguiente
-                    actual.siguiente.aux = aux
+                    aux.siguiente = actual.siguiente;
+                    actual.siguiente.aux = aux;
                 }
-                this.tamaño--
-                return true
+                this.tamaño--;
+                return true;
             }
-
-            aux = actual
-            actual = actual.siguiente
+            aux = actual;
+            actual = actual.siguiente;
         }
 
         return false;
     }
 
     buscarProducto(codigo) {
-        let actual = this.inicio
-        let aux = null
+        let actual = this.inicio;
+        let aux = null;
 
         while (actual != null) {
             if (actual.producto.codigo == codigo) {
                 if (aux == null) {
-                    return this.inicio
+                    return this.inicio;
                 }
                 else if (actual.siguiente == null) {
-                    return this.cola
+                    return this.cola;
                 }
                 else {
-                    return actual
+                    return actual;
                 }
             } 
-            aux = actual
-            actual = actual.siguiente
+            aux = actual;
+            actual = actual.siguiente;
         }
-        return false
+        return false;
     }
 
     añadirEn(nuevoProducto, pos) {
-        if (pos > this.tamaño || pos < 0 ) return false
+        if (pos > this.tamaño || pos < 1 ) return false
 
-        let actual = this.inicio
-        let aux
+        let actual = this.inicio;
+        let aux;
 
-        if (pos == 0) {
-            nuevoProducto.siguiente = actual
-            actual.anterior = nuevoProducto
-            this.inicio = nuevoProducto
+        if (pos == 1) {
+            nuevoProducto.siguiente = actual;
+            actual.anterior = nuevoProducto;
+            this.inicio = nuevoProducto;
         } else {
-            for (let i = 0; i < pos; i++) {
-                aux = actual
-                actual = actual.siguiente
+            for (let i = 1; i <= pos; i++) {
+                aux = actual;
+                actual = actual.siguiente;
             }
-
-            nuevoProducto.siguiente = actual
-            nuevoProducto.anterior = aux
-            actual.anterior = nuevoProducto
-            aux.siguiente = nuevoProducto
+            nuevoProducto.siguiente = actual;
+            nuevoProducto.anterior = aux;
+            actual.anterior = nuevoProducto;
+            aux.siguiente = nuevoProducto;
         }
-
-        this.tamaño++
-        return true
+        this.tamaño++;
+        return true;
     }
 }
 
-const todosPro = new Inventario()
+const todosPro = new Inventario();
 
 btnAgregar.addEventListener("click", function () {
     let nom = document.querySelector("#nom").value;
@@ -173,9 +168,9 @@ btnAgregar.addEventListener("click", function () {
 btnListar.addEventListener("click", function () {
     resultados.innerHTML = " ";
     let proTotales = todosPro.verProductos();
-    let actual = proTotales
+    let actual = proTotales;
     
-    resultados.innerHTML = "<ul style='border: 1px solid'>"
+    resultados.innerHTML = "<ul style='border: 1px solid'>";
 
     while (actual.siguiente !== null) {
         resultados.innerHTML += "<ul style='border: 1px solid'><li>Nombre: " + actual.producto.nombre + "</li><li>Codigo: " + actual.producto.codigo + "</li>" +
@@ -189,9 +184,9 @@ btnListar.addEventListener("click", function () {
 btnListarInv.addEventListener("click", function () {
     resultadosInv.innerHTML = " ";
     let proTotales = todosPro.verProductosAlReves();
-    let actual = proTotales
+    let actual = proTotales;
     
-    resultadosInv.innerHTML = "<ul style='border: 1px solid'>"
+    resultadosInv.innerHTML = "<ul style='border: 1px solid'>";
 
     while (actual.anterior !== null) {
         resultadosInv.innerHTML += "<ul style='border: 1px solid'><li>Nombre: " + actual.producto.nombre + "</li><li>Codigo: " + actual.producto.codigo + "</li>" +
